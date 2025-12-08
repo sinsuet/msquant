@@ -1,7 +1,6 @@
 from openai import OpenAI
 import os
 import json
-# 确保 2_alpha_engine.py 在同一目录下，且生成了 __init__.py 或直接引用
 from alpha_engine import analyze_factor 
 
 # ==========================================

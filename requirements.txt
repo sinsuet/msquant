@@ -1,0 +1,31 @@
+# === Core Data Science & Analysis ===
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+scipy>=1.10.0
+
+# === Deep Learning Framework (PyTorch) ===
+# Note: This installs the CPU version by default. 
+# For GPU support, please refer to https://pytorch.org/get-started/locally/
+torch>=2.0.0
+
+# === Financial Data Sources ===
+baostock>=0.8.8
+akshare>=1.10.0
+
+# === Visualization ===
+matplotlib>=3.7.0
+seaborn>=0.12.0
+mplfinance>=0.12.9
+
+# === LLM & Multimodal Agents ===
+openai>=1.0.0
+duckduckgo-search>=5.0.0
+
+# === Utilities ===
+tqdm>=4.65.0
+openpyxl>=3.1.0
+requests>=2.31.0
+pillow>=10.0.0
+
+# === We use qwen as our LLM provider.So we need to input our qwen api key. ===

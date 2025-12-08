@@ -1,0 +1,21 @@
+====== BiLSTM Strategy Report ======
+
+[1] Model Hyperparameters:
+  model_name     : BiLSTM
+  initial_capital: 1000000
+  top_k          : 5
+  seq_len        : 20
+  batch_size     : 128
+  epochs         : 15
+  lr             : 0.001
+  hidden_dim     : 64
+  num_layers     : 2
+  device         : cpu
+
+[2] Performance Metrics:
+  Total Return   : 21.08%
+  Annualized Ret : 9.89%
+  Max Drawdown   : 41.22%
+  Sharpe Ratio   : 0.4859
+  Win Rate       : 47.16%
+  Final Capital  : 1210823.70
