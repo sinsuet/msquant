@@ -31,7 +31,7 @@ CONFIG = {
     "top_k": 5,
     "seq_len": 20,
     "batch_size": 128,
-    "epochs": 15,
+    "epochs": 400,
     "lr": 0.001,
     "hidden_dim": 64,
     "num_layers": 2,

@@ -1,0 +1,22 @@
+====== Transformer Strategy Report ======
+
+[1] Model Hyperparameters:
+  model_name     : Transformer
+  initial_capital: 1000000
+  top_k          : 5
+  seq_len        : 20
+  batch_size     : 128
+  epochs         : 400
+  lr             : 0.0005
+  d_model        : 64
+  nhead          : 4
+  num_layers     : 2
+  device         : cuda
+
+[2] Performance Metrics:
+  Total Return   : 9.28%
+  Annualized Ret : 4.47%
+  Max Drawdown   : 39.08%
+  Sharpe Ratio   : 0.2959
+  Win Rate       : 45.99%
+  Final Capital  : 1092794.39

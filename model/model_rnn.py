@@ -32,7 +32,7 @@ CONFIG = {
     "top_k": 5,
     "seq_len": 20,       # 时间窗口
     "batch_size": 128,
-    "epochs": 15,
+    "epochs": 200,
     "lr": 0.001,
     "hidden_dim": 64,
     "num_layers": 2,
