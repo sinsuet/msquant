@@ -1,0 +1,8 @@
+{
+    "name": "Overnight_Gap",
+    "formula": "(OPEN - DELAY(CLOSE, 1)) / DELAY(CLOSE, 1)",
+    "IC_Mean": 0.0066,
+    "Annual_Return": "120.45%",
+    "Sharpe": 1.6,
+    "logic": "隔夜信息反应。大幅高开可能代表利好过度反应或动量爆发。"
+}

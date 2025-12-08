@@ -1,0 +1,8 @@
+{
+    "name": "Rank_Correlation_Reversion",
+    "formula": "-1 * CORR(RANK(CLOSE), RANK(VOLUME), 10)",
+    "IC_Mean": 0.0056,
+    "Annual_Return": "-4.74%",
+    "Sharpe": -0.11,
+    "logic": "排名相关性回归。当价格排名与成交量排名高度正相关时，往往意味着拥挤交易，后续可能出现反转。"
+}

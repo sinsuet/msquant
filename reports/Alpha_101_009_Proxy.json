@@ -1,0 +1,8 @@
+{
+    "name": "Alpha_101_009_Proxy",
+    "formula": "(CLOSE - DELAY(CLOSE, 5)) * (RANK(MA(CLOSE, 5)) - 0.5)",
+    "IC_Mean": -0.0147,
+    "Annual_Return": "-35.05%",
+    "Sharpe": -0.74,
+    "logic": "带趋势确认的短期动量。参考 Alpha#9 结构，当价格处于高分位趋势时，短期动量的持续性更强。"
+}

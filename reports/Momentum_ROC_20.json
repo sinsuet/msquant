@@ -1,0 +1,8 @@
+{
+    "name": "Momentum_ROC_20",
+    "formula": "CLOSE / DELAY(CLOSE, 20) - 1",
+    "IC_Mean": -0.0132,
+    "Annual_Return": "13.85%",
+    "Sharpe": 0.18,
+    "logic": "经典动量因子。基于价格惯性理论，投资者对信息的反应存在滞后，导致过去表现好的股票在短期内倾向于继续上涨。"
+}

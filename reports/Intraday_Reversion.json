@@ -1,0 +1,8 @@
+{
+    "name": "Intraday_Reversion",
+    "formula": "(OPEN - CLOSE) / (HIGH - LOW)",
+    "IC_Mean": 0.0298,
+    "Annual_Return": "-39.15%",
+    "Sharpe": -0.69,
+    "logic": "日内反转。如果收盘价显著低于开盘价（实体阴线），可能代表日内恐慌盘过度释放，次日存在高开或反弹的流动性溢价机会。"
+}

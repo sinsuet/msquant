@@ -1,0 +1,8 @@
+{
+    "name": "Volume_Price_Confirm",
+    "formula": "CORR(CLOSE, VOLUME, 20)",
+    "IC_Mean": -0.02,
+    "Annual_Return": "-26.0%",
+    "Sharpe": -0.47,
+    "logic": "量价确认。价格趋势与成交量的正相关性（量价齐升）确认了趋势的真实性。"
+}

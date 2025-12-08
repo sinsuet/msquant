@@ -1,0 +1,8 @@
+{
+    "name": "Bollinger_Reversion",
+    "formula": "-1 * (CLOSE - MA(CLOSE, 20)) / STD(CLOSE, 20)",
+    "IC_Mean": 0.0155,
+    "Annual_Return": "-74.91%",
+    "Sharpe": -1.25,
+    "logic": "布林带均值回归。价格偏离均线超过标准差（Z-Score过高）通常源于市场情绪的过度宣泄，预期会向均值回归。"
+}

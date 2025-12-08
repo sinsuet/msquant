@@ -1,0 +1,8 @@
+{
+    "name": "Volume_Shock_Reversal",
+    "formula": "-1 * VOLUME / MA(VOLUME, 20)",
+    "IC_Mean": 0.0216,
+    "Annual_Return": "6.54%",
+    "Sharpe": 0.11,
+    "logic": "巨量反转。异常放量（Volume Shock）往往发生在趋势末端（诱多或恐慌盘涌出）。"
+}

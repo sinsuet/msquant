@@ -1,0 +1,8 @@
+{
+    "name": "Alpha_101_006_Like",
+    "formula": "-1 * CORR(OPEN, VOLUME, 10)",
+    "IC_Mean": 0.012,
+    "Annual_Return": "25.67%",
+    "Sharpe": 0.46,
+    "logic": "经典 Alpha#6 变体。开盘价与成交量的负相关性意味着“缩量上涨”或“放量下跌”，通常是知情交易者介入的信号。"
+}

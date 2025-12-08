@@ -1,0 +1,8 @@
+{
+    "name": "Volume_Variance_Penalty",
+    "formula": "-1 * STD(VOLUME, 20) / MA(VOLUME, 20)",
+    "IC_Mean": 0.0202,
+    "Annual_Return": "-17.94%",
+    "Sharpe": -0.32,
+    "logic": "成交量稳定性。成交量忽大忽小的股票往往流动性不稳定，机构资金倾向于配置流动性可预测性高的资产。"
+}

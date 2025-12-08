@@ -1,0 +1,8 @@
+{
+    "name": "Liquidity_Premium",
+    "formula": "-1 * MA(VOLUME * CLOSE, 20)",
+    "IC_Mean": 0.0101,
+    "Annual_Return": "26.85%",
+    "Sharpe": 0.57,
+    "logic": "非流动性溢价。交易金额较小的股票通常因流动性差而存在折价，长期持有应获得流动性补偿。"
+}

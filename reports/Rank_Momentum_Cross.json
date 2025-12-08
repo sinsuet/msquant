@@ -1,0 +1,8 @@
+{
+    "name": "Rank_Momentum_Cross",
+    "formula": "RANK(CLOSE - DELAY(CLOSE, 10))",
+    "IC_Mean": -0.0178,
+    "Annual_Return": "-40.19%",
+    "Sharpe": -0.88,
+    "logic": "截面动量。不看绝对涨幅，看该股票在全市场中的相对强弱。资金往往抱团流入相对表现最强的头部股票。"
+}

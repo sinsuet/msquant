@@ -1,0 +1,8 @@
+{
+    "name": "Max_Retracement_Anchor",
+    "formula": "CLOSE / TS_MAX(CLOSE, 20) - 1",
+    "IC_Mean": -0.0119,
+    "Annual_Return": "-19.44%",
+    "Sharpe": -0.32,
+    "logic": "锚定效应。投资者往往以近期的最高价作为参考点。当前价格距离最高价越近，测试突破阻力的动能。"
+}

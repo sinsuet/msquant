@@ -1,0 +1,8 @@
+{
+    "name": "Alpha_101_054_Simp",
+    "formula": "-1 * (LOW - CLOSE) * (OPEN - LOW) / ((HIGH - LOW) * CLOSE)",
+    "IC_Mean": -0.0375,
+    "Annual_Return": "-41.61%",
+    "Sharpe": -0.69,
+    "logic": "结构化量价因子。参考 Alpha#54，捕捉日内K线形态（如下影线长度）所隐含的买卖力量对比。"
+}

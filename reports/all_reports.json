@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Momentum_ROC_20",
+        "formula": "CLOSE / DELAY(CLOSE, 20) - 1",
+        "IC_Mean": -0.0132,
+        "Annual_Return": "13.85%",
+        "Sharpe": 0.18,
+        "logic": "经典动量因子。基于价格惯性理论，投资者对信息的反应存在滞后，导致过去表现好的股票在短期内倾向于继续上涨。"
+    },
+    {
+        "name": "Alpha_101_009_Proxy",
+        "formula": "(CLOSE - DELAY(CLOSE, 5)) * (RANK(MA(CLOSE, 5)) - 0.5)",
+        "IC_Mean": -0.0147,
+        "Annual_Return": "-35.05%",
+        "Sharpe": -0.74,
+        "logic": "带趋势确认的短期动量。参考 Alpha#9 结构，当价格处于高分位趋势时，短期动量的持续性更强。"
+    },
+    {
+        "name": "Max_Retracement_Anchor",
+        "formula": "CLOSE / TS_MAX(CLOSE, 20) - 1",
+        "IC_Mean": -0.0119,
+        "Annual_Return": "-19.44%",
+        "Sharpe": -0.32,
+        "logic": "锚定效应。投资者往往以近期的最高价作为参考点。当前价格距离最高价越近，测试突破阻力的动能。"
+    },
+    {
+        "name": "Path_Efficiency",
+        "formula": "(CLOSE - DELAY(CLOSE, 10)) / (MA(HIGH - LOW, 10) * 10)",
+        "IC_Mean": -0.0188,
+        "Annual_Return": "44.67%",
+        "Sharpe": 0.68,
+        "logic": "趋势效率。衡量价格移动的纯粹度。如果价格以低波动率直线移动，意味着信息传递效率高，趋势更稳健。"
+    },
+    {
+        "name": "Rank_Momentum_Cross",
+        "formula": "RANK(CLOSE - DELAY(CLOSE, 10))",
+        "IC_Mean": -0.0178,
+        "Annual_Return": "-40.19%",
+        "Sharpe": -0.88,
+        "logic": "截面动量。不看绝对涨幅，看该股票在全市场中的相对强弱。资金往往抱团流入相对表现最强的头部股票。"
+    },
+    {
+        "name": "Bollinger_Reversion",
+        "formula": "-1 * (CLOSE - MA(CLOSE, 20)) / STD(CLOSE, 20)",
+        "IC_Mean": 0.0155,
+        "Annual_Return": "-74.91%",
+        "Sharpe": -1.25,
+        "logic": "布林带均值回归。价格偏离均线超过标准差（Z-Score过高）通常源于市场情绪的过度宣泄，预期会向均值回归。"
+    },
+    {
+        "name": "Intraday_Reversion",
+        "formula": "(OPEN - CLOSE) / (HIGH - LOW)",
+        "IC_Mean": 0.0298,
+        "Annual_Return": "-39.15%",
+        "Sharpe": -0.69,
+        "logic": "日内反转。如果收盘价显著低于开盘价（实体阴线），可能代表日内恐慌盘过度释放，次日存在高开或反弹的流动性溢价机会。"
+    },
+    {
+        "name": "Alpha_101_006_Like",
+        "formula": "-1 * CORR(OPEN, VOLUME, 10)",
+        "IC_Mean": 0.012,
+        "Annual_Return": "25.67%",
+        "Sharpe": 0.46,
+        "logic": "经典 Alpha#6 变体。开盘价与成交量的负相关性意味着“缩量上涨”或“放量下跌”，通常是知情交易者介入的信号。"
+    },
+    {
+        "name": "Min_Rebound_Strength",
+        "formula": "(CLOSE - TS_MIN(LOW, 20)) / TS_MIN(LOW, 20)",
+        "IC_Mean": -0.0237,
+        "Annual_Return": "103.43%",
+        "Sharpe": 1.43,
+        "logic": "底部反弹强度。基于支撑位逻辑，测试价格从近期最低点反弹的幅度。过弱的反弹可能意味着下跌中继，过强则确立反转。"
+    },
+    {
+        "name": "Low_Vol_Anomaly",
+        "formula": "-1 * STD(CLOSE, 20)",
+        "IC_Mean": 0.0067,
+        "Annual_Return": "-10.92%",
+        "Sharpe": -0.32,
+        "logic": "低波动率异象。实证表明，低波动率股票的长期风险调整后收益优于高波动率股票。"
+    },
+    {
+        "name": "High_Low_Range_Vol",
+        "formula": "-1 * MA((HIGH - LOW) / CLOSE, 10)",
+        "IC_Mean": 0.0267,
+        "Annual_Return": "-4.2%",
+        "Sharpe": -0.06,
+        "logic": "日内波动惩罚。平均日内振幅过大的股票包含了高不确定性，投资者应要求更高的风险补偿。"
+    },
+    {
+        "name": "Volume_Variance_Penalty",
+        "formula": "-1 * STD(VOLUME, 20) / MA(VOLUME, 20)",
+        "IC_Mean": 0.0202,
+        "Annual_Return": "-17.94%",
+        "Sharpe": -0.32,
+        "logic": "成交量稳定性。成交量忽大忽小的股票往往流动性不稳定，机构资金倾向于配置流动性可预测性高的资产。"
+    },
+    {
+        "name": "Volume_Price_Confirm",
+        "formula": "CORR(CLOSE, VOLUME, 20)",
+        "IC_Mean": -0.02,
+        "Annual_Return": "-26.0%",
+        "Sharpe": -0.47,
+        "logic": "量价确认。价格趋势与成交量的正相关性（量价齐升）确认了趋势的真实性。"
+    },
+    {
+        "name": "Volume_Shock_Reversal",
+        "formula": "-1 * VOLUME / MA(VOLUME, 20)",
+        "IC_Mean": 0.0216,
+        "Annual_Return": "6.54%",
+        "Sharpe": 0.11,
+        "logic": "巨量反转。异常放量（Volume Shock）往往发生在趋势末端（诱多或恐慌盘涌出）。"
+    },
+    {
+        "name": "Alpha_101_054_Simp",
+        "formula": "-1 * (LOW - CLOSE) * (OPEN - LOW) / ((HIGH - LOW) * CLOSE)",
+        "IC_Mean": -0.0375,
+        "Annual_Return": "-41.61%",
+        "Sharpe": -0.69,
+        "logic": "结构化量价因子。参考 Alpha#54，捕捉日内K线形态（如下影线长度）所隐含的买卖力量对比。"
+    },
+    {
+        "name": "Liquidity_Premium",
+        "formula": "-1 * MA(VOLUME * CLOSE, 20)",
+        "IC_Mean": 0.0101,
+        "Annual_Return": "26.85%",
+        "Sharpe": 0.57,
+        "logic": "非流动性溢价。交易金额较小的股票通常因流动性差而存在折价，长期持有应获得流动性补偿。"
+    },
+    {
+        "name": "Rank_Correlation_Reversion",
+        "formula": "-1 * CORR(RANK(CLOSE), RANK(VOLUME), 10)",
+        "IC_Mean": 0.0056,
+        "Annual_Return": "-4.74%",
+        "Sharpe": -0.11,
+        "logic": "排名相关性回归。当价格排名与成交量排名高度正相关时，往往意味着拥挤交易，后续可能出现反转。"
+    },
+    {
+        "name": "Close_Location_Value_MA",
+        "formula": "MA((CLOSE - LOW) / (HIGH - LOW), 10)",
+        "IC_Mean": -0.021,
+        "Annual_Return": "-30.14%",
+        "Sharpe": -0.59,
+        "logic": "平均CLV。持续收在日内高位表明多头力量在每日收盘阶段依然占据主导，是强势股特征。"
+    },
+    {
+        "name": "Overnight_Gap",
+        "formula": "(OPEN - DELAY(CLOSE, 1)) / DELAY(CLOSE, 1)",
+        "IC_Mean": 0.0066,
+        "Annual_Return": "120.45%",
+        "Sharpe": 1.6,
+        "logic": "隔夜信息反应。大幅高开可能代表利好过度反应或动量爆发。"
+    },
+    {
+        "name": "Tail_Risk_Skew",
+        "formula": "(TS_MAX(HIGH, 20) - CLOSE) / (CLOSE - TS_MIN(LOW, 20) + 0.001)",
+        "IC_Mean": 0.0158,
+        "Annual_Return": "-54.94%",
+        "Sharpe": -0.91,
+        "logic": "偏度代理指标。如果价格更接近近期低点而非高点，表明卖压主导，尾部风险较高。"
+    }
+]

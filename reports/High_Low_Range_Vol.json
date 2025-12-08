@@ -1,0 +1,8 @@
+{
+    "name": "High_Low_Range_Vol",
+    "formula": "-1 * MA((HIGH - LOW) / CLOSE, 10)",
+    "IC_Mean": 0.0267,
+    "Annual_Return": "-4.2%",
+    "Sharpe": -0.06,
+    "logic": "日内波动惩罚。平均日内振幅过大的股票包含了高不确定性，投资者应要求更高的风险补偿。"
+}

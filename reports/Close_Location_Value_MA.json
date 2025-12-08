@@ -1,0 +1,8 @@
+{
+    "name": "Close_Location_Value_MA",
+    "formula": "MA((CLOSE - LOW) / (HIGH - LOW), 10)",
+    "IC_Mean": -0.021,
+    "Annual_Return": "-30.14%",
+    "Sharpe": -0.59,
+    "logic": "平均CLV。持续收在日内高位表明多头力量在每日收盘阶段依然占据主导，是强势股特征。"
+}

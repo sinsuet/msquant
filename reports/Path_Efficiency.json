@@ -1,0 +1,8 @@
+{
+    "name": "Path_Efficiency",
+    "formula": "(CLOSE - DELAY(CLOSE, 10)) / (MA(HIGH - LOW, 10) * 10)",
+    "IC_Mean": -0.0188,
+    "Annual_Return": "44.67%",
+    "Sharpe": 0.68,
+    "logic": "趋势效率。衡量价格移动的纯粹度。如果价格以低波动率直线移动，意味着信息传递效率高，趋势更稳健。"
+}

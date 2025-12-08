@@ -1,0 +1,8 @@
+{
+    "name": "Min_Rebound_Strength",
+    "formula": "(CLOSE - TS_MIN(LOW, 20)) / TS_MIN(LOW, 20)",
+    "IC_Mean": -0.0237,
+    "Annual_Return": "103.43%",
+    "Sharpe": 1.43,
+    "logic": "底部反弹强度。基于支撑位逻辑，测试价格从近期最低点反弹的幅度。过弱的反弹可能意味着下跌中继，过强则确立反转。"
+}

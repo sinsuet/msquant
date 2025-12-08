@@ -1,0 +1,8 @@
+{
+    "name": "Low_Vol_Anomaly",
+    "formula": "-1 * STD(CLOSE, 20)",
+    "IC_Mean": 0.0067,
+    "Annual_Return": "-10.92%",
+    "Sharpe": -0.32,
+    "logic": "低波动率异象。实证表明，低波动率股票的长期风险调整后收益优于高波动率股票。"
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Tail_Risk_Skew",
+    "formula": "(TS_MAX(HIGH, 20) - CLOSE) / (CLOSE - TS_MIN(LOW, 20) + 0.001)",
+    "IC_Mean": 0.0158,
+    "Annual_Return": "-54.94%",
+    "Sharpe": -0.91,
+    "logic": "偏度代理指标。如果价格更接近近期低点而非高点，表明卖压主导，尾部风险较高。"
+}
