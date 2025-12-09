@@ -1,104 +1,202 @@
-# Estimating Distributional Treatment Effects with Machine Learning (PyTorch Implementation)
 
-这是一个基于 Python 和 PyTorch 的复现项目，复现了论文 **"Estimating Distributional Treatment Effects in Randomized Experiments: Machine Learning for Variance Reduction"** 中的核心算法和实验。
+# MSQuant: LLM-Driven Quantitative Investment System with Multimodal Perception & Explainable AI
 
-原项目使用 R 语言实现。本项目在保留原论文核心逻辑（Cross-fitting, Regression Adjustment, Bootstrap Inference）的基础上，做出了以下重大优化：
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-  * **PyTorch 加速**：利用 PyTorch 构建**多输出神经网络 (Multi-output Neural Network)**。
-  * **多任务学习**：不同于原 R 代码对每个评估阈值 $y$ 单独训练模型，本项目只需训练一个网络即可同时预测所有阈值点的累积分布函数 (CDF)，在大规模模拟中显著提升了计算效率。
-  * **GPU 支持**：支持 CUDA 加速，适合处理大规模数据。
+## 📖 项目简介 (Introduction)
 
-## 📋 目录结构
+**MSQuant** 是一个端到端的、基于大语言模型（LLM）与深度学习的智能量化投资系统。本项目复现并深度扩展了论文 *Automate Strategy Finding with LLM in Quant Investment* 的核心思想，旨在解决传统因子挖掘中存在的“过度拟合”与“黑盒”问题。
 
-| 文件名 | 描述 |
-| :--- | :--- |
-| `functions.py` | **核心库**。包含数据生成过程 (DGP)、PyTorch 模型定义 (`DistributionalNet`)、以及 DTE/QTE 估计算法。 |
-| `run_simulation.py` | **模拟脚本**。复现论文中的蒙特卡洛模拟（DTE、QTE、DGP序列），计算 Bias 和 RMSE。 |
-| `data_pre_process.py` | **数据预处理**。将原始实验数据 (`.tab` 或 `.dta`) 转换为 CSV 格式。 |
-| `analysis_water_consumption.py` | **真实数据分析**。复现 Ferraro & Price (2013) 水资源消耗实验的 DTE 估计。 |
-| `plot_figures.py` | **绘图脚本**。读取结果并绘制论文中的 RMSE 缩减图和 Bias 图。 |
-| `compute_stats.py` | (可选) 统计辅助脚本，用于处理原始模拟数据生成特定的汇总表格。 |
+系统集成了以下前沿技术：
+* **多模态感知 (Multimodal Perception)**: 利用视觉模型 (Qwen-VL) 解读 K 线图表，结合 RAG 技术检索实时财经新闻，构建动态的市场情境 (Market Context)。
+* **情境感知型挖掘 (Context-Aware Mining)**: 不再盲目搜索公式，而是基于 AI 感知的市场状态（如“震荡下行”），定向生成适应当前风格的 Alpha 因子。
+* **多智能体锦标赛 (Multi-Agent Tournament)**: 引入 LLM 裁判 (Judge Agent)，基于统计指标与逻辑适应性对因子进行多轮 PK 筛选。
+* **可解释深度策略 (Explainable Deep Learning)**: 实现了带有 **权重生成器 (Weight Generator)** 的 RNN/BiLSTM/Transformer 模型，能够输出因子权重的动态热力图，打开深度学习的“黑盒”。
 
-## 🛠️ 安装依赖
+---
 
-本项目需要 Python 3.8+。请运行以下命令安装所需依赖库：
+## 📂 项目结构 (Repository Structure)
+
+```text
+msquant/
+├── data/                       # 数据存储目录
+│   └── market_data.csv         # 历史行情数据 (Baostock源, 自动下载)
+├── model/                      # 深度学习策略模型
+│   ├── model_rnn.py            # 可解释 RNN 策略
+│   ├── model_bilstm.py         # 可解释 BiLSTM 策略 (推荐)
+│   └── model_transformer.py    # 可解释 Transformer 策略 (SOTA)
+├── reports/                    # 实验结果与可视化输出
+│   ├── all_reports.json        # 因子池详细指标
+│   ├── mined_alphas_pro.json   # AI 挖掘出的因子公式
+│   ├── *_report.txt            # 模型详细回测报告
+│   ├── *_equity.png            # 策略资金曲线图
+│   └── *_weights_heatmap.png   # 因子动态权重热力图
+├── paper/                      # 参考文献与 Proposal
+│   ├── AlphaForge.pdf
+│   ├── proposal.pdf
+│   └── ...
+├── alpha_engine.py             # 核心因子计算引擎 (算子库: MA, RANK, CORR...)
+├── alpha_miner.py              # 基础版因子挖掘 (仅数值)
+├── alpha_miner_pro.py          # [Pro] 情境感知型因子挖掘 (多模态)
+├── batch_processor.py          # 因子批量回测与指标计算
+├── data_loader.py              # 数据下载器 (基于 Baostock)
+├── llm_judge.py                # 基础 LLM 判别模块
+├── multimodal_utils.py         # 多模态工具箱 (K线绘制 + 联网搜索 + 视觉感知)
+├── portfolio.py                # 简易 Top-K 组合回测工具
+├── tournament.py               # 基础锦标赛筛选
+├── tournament_pro.py           # [Pro] 多模态锦标赛筛选
+└── requirements.txt            # 项目依赖库
+````
+
+-----
+
+## 🛠️ 环境安装 (Installation)
+
+推荐使用 Conda 创建独立环境，并安装 Python 3.8 或以上版本。
+
+1.  **克隆仓库**
+
+    ```bash
+    git clone [https://github.com/your_username/msquant.git](https://github.com/your_username/msquant.git)
+    cd msquant
+    ```
+
+2.  **安装依赖**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+    *注：项目依赖包含 `torch`, `pandas`, `baostock`, `akshare`, `openai`, `mplfinance`, `duckduckgo-search` 等。*
+
+-----
+
+## 🚀 使用指南 (Quick Start Pipeline)
+
+请按照以下顺序运行脚本，完成从数据准备到策略回测的全过程。
+
+### Step 1: 数据准备 (Data Preparation)
+
+从 Baostock 免费下载上证 50 成分股过去 10 年的后复权数据。
 
 ```bash
-pip install torch numpy pandas scikit-learn matplotlib seaborn scipy
+python data_loader.py
 ```
 
-*注意：如果你需要读取 `.dta` 文件而不是 `.tab` 文件，可能还需要安装 `pyreadstat` 或 `pyreadr`。*
+> **输出**: `./data/market_data.csv` (约 10 万行数据，包含 OHLCV)
 
-## 🚀 快速开始
+### Step 2: 多模态因子挖掘 (Context-Aware Mining)
 
-### 1\. 数据准备 (针对真实数据分析)
+让 AI (Qwen-VL + Qwen-Plus) 先“看图读新闻”感知市场，再定向生成因子。
+*(需在代码中配置您的 DashScope API Key)*
 
-为了运行水资源消耗的实证分析，你需要先下载原始数据。
+```bash
+python alpha_miner_pro.py
+```
 
-1.  访问 [Harvard Dataverse](https://doi.org/10.7910/DVN1/22633)。
-2.  下载 **`090113_TotWatDat_cor_merge_Price.tab`** 文件。
-3.  在项目根目录下创建一个 `data` 文件夹，将下载的文件放入其中。
-4.  运行预处理脚本：
+> **输出**: `./reports/mined_alphas_pro.json` (包含生成的因子公式及其设计逻辑)
+
+### Step 3: 因子批量评估 (Batch Evaluation)
+
+计算因子池中所有因子的 IC (信息系数)、夏普比率、换手率等指标，生成详细报表。
+
+```bash
+python batch_processor.py
+```
+
+> **输出**: `./reports/all_reports.json` (因子性能总表)
+
+### Step 4: 多智能体锦标赛 (Tournament Selection)
+
+启动 LLM 裁判，结合当前市场情境描述，对候选因子进行两两 PK，筛选出“Alpha King”。
+
+```bash
+python tournament_pro.py
+```
+
+> **输出**: 筛选出的最佳因子组合。
+
+### Step 5: 深度学习策略训练 (Deep Learning Strategy)
+
+使用可解释神经网络学习因子的动态权重组合。模型会自动读取 Step 3 的结果，构建时间序列，训练并回测。
+
+  * **推荐使用 BiLSTM 模型 (稳健性最佳)**:
+    ```bash
+    python model/model_bilstm.py
+    ```
+  * **或者尝试 Transformer 模型 (捕捉全局依赖)**:
+    ```bash
+    python model/model_transformer.py
+    ```
+
+> **输出 (保存在 `reports/`)**:
+>
+>   * `BiLSTM_equity.png`: 策略资金曲线 vs 市场基准
+>   * `BiLSTM_weights_heatmap.png`: **核心亮点**，展示 AI 在不同时期如何调整因子权重。
+>   * `BiLSTM_report.txt`: 包含年化收益、最大回撤等详细指标的文本报告。
+
+-----
+
+## 📊 实验结果示例 (Experimental Results)
+
+基于 2014-2022 年训练集与 2023-2024 年样本外测试集的实测数据：
+
+| 模型 (Model) | 年化收益 (Ann. Ret) | 最大回撤 (Max DD) | 夏普比率 (Sharpe) | 胜率 (Win Rate) |
+| :--- | :--- | :--- | :--- | :--- |
+| **BiLSTM** | **14.40%** | **30.14%** | **0.6568** | **48.14%** |
+| Transformer| 4.47% | 39.08% | 0.2959 | 45.99% |
+| RNN | 4.64% | 34.83% | 0.3002 | 46.38% |
+
+*注：以上数据基于 Top-5 轮动策略，扣除万分之三手续费。*
+
+### 可解释性展示 (Explainability)
+
+生成的 `*_weights_heatmap.png` 图表清晰展示了策略的逻辑：
+
+  * 在 **牛市** 阶段，模型会自动提高 **动量类 (Momentum)** 因子的权重（红色区域）。
+  * 在 **震荡市/熊市** 阶段，模型会自动切换至 **反转类 (Reversion)** 和 **波动率 (Volatility)** 因子，实现风险控制。
+
+-----
+
+## 🧩 核心模块说明 (Modules)
+
+### 1\. `alpha_engine.py`
+
+量化计算的核心。实现了 Pandas 高效算子，包括：
+
+  * `DELAY(x, n)`: 滞后项
+  * `MA(x, n)`: 移动平均
+  * `RANK(x)`: 截面排名 (Cross-sectional Rank)
+  * `CORR(x, y, n)`: 滚动相关系数
+
+### 2\. `multimodal_utils.py`
+
+多模态感知的实现层。
+
+  * **视觉**: 调用 `mplfinance` 生成 K 线图。
+  * **文本**: 调用 `duckduckgo_search` 模拟 RAG 检索实时新闻。
+  * **感知**: 调用 VL 大模型生成 `Market Context` 描述。
+
+### 3\. `model/`
+
+包含三个独立的深度学习策略脚本。所有模型均集成了：
+
+  * **数据对齐**: 自动处理滑动窗口带来的长度不一致问题。
+  * **早停机制**: 防止过拟合。
+  * **自动绘图**: 训练结束后直接输出评估图表。
+
+-----
+
+## ⚠️ 注意事项
+
+1.  **API Key**: 请确保在 `alpha_miner_pro.py`, `tournament_pro.py` 和 `multimodal_utils.py` 中填入有效的阿里云 DashScope API Key (用于调用 Qwen 系列模型)。
+2.  **网络连接**: `duckduckgo-search` 可能需要网络代理支持。如果无法连接，`multimodal_utils.py` 会自动降级为仅使用技术面数据。
+3.  **路径问题**: 运行 `model/` 下的脚本时，代码已内置路径修复逻辑 (`sys.path.append`)，可直接在项目根目录或子目录下运行。
+
 
 <!-- end list -->
 
-```bash
-python data_pre_process.py
 ```
-
-这将生成 `data/data_ferraroprice.csv` 文件。
-
-### 2\. 运行蒙特卡洛模拟
-
-复现论文中的模拟实验（验证方法在有限样本下的表现）：
-
-```bash
-python run_simulation.py
 ```
-
-  * 该脚本会依次运行 DTE 模拟。
-  * 结果将保存在 `results/dte_simulation_results.csv`。
-  * *提示：为了快速测试，可以修改脚本中的 `n_sim` 参数减少模拟次数。*
-
-### 3\. 运行真实数据分析
-
-对水资源消耗数据进行机器学习调整后的分布处理效应 (DTE) 估计：
-
-```bash
-python analysis_water_consumption.py
-```
-
-  * 该脚本会自动处理缺失值，训练模型并进行推断。
-  * **输出**：
-      * 结果数据：`results/water_analysis_results.csv`
-      * 可视化图表：`results/water_dte_plot.png`
-
-### 4\. 绘制结果图表
-
-将模拟结果可视化（Bias 和 RMSE Reduction）：
-
-```bash
-python plot_figures.py
-```
-
-图片将保存在 `results/` 文件夹中。
-
-## 🧠 方法论说明：Python vs R
-
-为了在 Python 中实现高效计算，本项目对原 R 代码的实现细节做了一处关键调整：
-
-  * **R 版本**：对每一个评估点 $y$（例如 0 到 200 加仑中的每一点），单独调用 `xgboost` 或 `glmnet` 训练一个二分类模型。这导致需要循环训练数百次。
-  * **Python 版本 (本项目)**：构建了一个**多输出神经网络**。
-      * **输入**：协变量 $X$。
-      * **输出层**：神经元数量等于评估点 $y$ 的数量（例如 201 个）。
-      * **损失函数**：所有输出节点的二元交叉熵 (BCE) 之和。
-      * **优势**：只需一次前向传播和反向传播，即可学得所有阈值下的分布特征，极大利用了 GPU 的并行能力。
-
-尽管模型架构有所不同（神经网络 vs 树模型/Lasso），但**利用机器学习进行回归调整以降低方差**的核心原理是一致的。
-
-## 📄 引用
-
-本项目是以下论文及其代码的非官方 Python 复现：
-
-  * **Paper**: "Estimating Distributional Treatment Effects in Randomized Experiments: Machine Learning for Variance Reduction"
-  * **Original Repo**: [cyberagentailab/dte-ml-adjustment](https://github.com/CyberAgentAILab/dte-ml-adjustment)
