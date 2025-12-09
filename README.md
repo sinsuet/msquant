@@ -1,9 +1,3 @@
-这是一个为上述 Python 复现项目编写的详细 `README.md` 文件。它涵盖了项目背景、环境依赖、文件结构、以及分步运行指南。
-
-你可以将以下内容保存为 `README.md` 文件，放在项目的根目录下。
-
------
-
 # Estimating Distributional Treatment Effects with Machine Learning (PyTorch Implementation)
 
 这是一个基于 Python 和 PyTorch 的复现项目，复现了论文 **"Estimating Distributional Treatment Effects in Randomized Experiments: Machine Learning for Variance Reduction"** 中的核心算法和实验。
